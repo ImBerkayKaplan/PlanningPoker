@@ -7,9 +7,6 @@ import { GamePage } from './pages/GamePage/GamePage';
 import HomePage from './pages/HomePage/HomePage';
 import JoinPage from './pages/JoinPage/JoinPage';
 import { theme } from './service/theme';
-import { AboutPage } from './pages/AboutPage/AboutPage';
-import { ExamplesPage } from './pages/ExamplesPage/ExamplesPage';
-import { GuidePage } from './pages/GuidePage/GuidePage';
 
 function App() {
   return (
@@ -20,13 +17,10 @@ function App() {
           <Router>
             <Toolbar />
             <Switch>
-              <Route path='/game/:id' component={GamePage} />
-              <Route path='/delete-old-games' component={DeleteOldGames} />
-              <Route path='/join/:id' component={JoinPage} />
-              <Route path='/about-planning-poker' component={AboutPage} />
-              <Route path='/examples' component={ExamplesPage} />
-              <Route path='/guide' component={GuidePage} />
-              <Route exact path='/*' component={HomePage} />
+              <Route path='/apps/voting/game/:id' component={GamePage} />
+              <Route path='/apps/voting/delete-old-games' component={DeleteOldGames} />
+              <Route path='/apps/voting/join/:id' component={JoinPage} />
+              <Route exact path='/apps/voting' component={HomePage} />
             </Switch>
           </Router>
         </StylesProvider>

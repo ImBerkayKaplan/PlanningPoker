@@ -2,9 +2,7 @@
 /* eslint-disable testing-library/no-container */
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 import { Toolbar } from './Toolbar';
-import { useTranslation } from 'react-i18next';
 
 const mockHistoryPush = jest.fn();
 

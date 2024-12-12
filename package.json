@@ -1,6 +1,9 @@
 {
   "name": "planning-poker",
   "version": "0.1.0",
+  "author": "Berkay Kaplan",
+  "license": "MIT",
+  "homepage": "/apps/voting",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",

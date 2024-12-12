@@ -33,7 +33,7 @@ export const GameController: React.FC<GameControllerProps> = ({ game, currentPla
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const copyInviteLink = () => {
     const dummy = document.createElement('input');
-    const url = `${window.location.origin}/join/${game.id}`;
+    const url = `${window.location.origin}/apps/voting/join/${game.id}`;
     document.body.appendChild(dummy);
     dummy.value = url;
     dummy.select();
@@ -43,12 +43,12 @@ export const GameController: React.FC<GameControllerProps> = ({ game, currentPla
   };
 
   const leaveGame = () => {
-    history.push(`/`);
+    history.push(`/apps/voting`);
   };
 
   const handleRemoveGame = async (recentGameId: string) => {
     await removeGame(recentGameId);
-    window.location.href = '/';
+    window.location.href = '/apps/voting';
   };
 
   return (

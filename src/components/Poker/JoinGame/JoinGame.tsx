@@ -22,12 +22,12 @@ export const JoinGame = () => {
         if (await getGame(joinGameId)) {
           setIsGameFound(true);
           if (await isCurrentPlayerInGame(joinGameId)) {
-            history.push(`/game/${joinGameId}`);
+            history.push(`/apps/voting/game/${joinGameId}`);
           }
         }else {
           setShowNotExistMessage(true);
           setTimeout(() => {
-            history.push('/');
+            history.push('/apps/voting');
           }, 5000)
         }
       }
@@ -43,7 +43,7 @@ export const JoinGame = () => {
 
       setIsGameFound(res);
       if (res) {
-        history.push(`/game/${joinGameId}`);
+        history.push(`/apps/voting/game/${joinGameId}`);
       }
       setLoading(false);
     }

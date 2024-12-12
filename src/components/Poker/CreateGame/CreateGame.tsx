@@ -3,7 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   Checkbox,
   FormControlLabel,
   Grow,
@@ -17,7 +16,6 @@ import { useHistory } from 'react-router-dom';
 import { addNewGame } from '../../../service/games';
 import { GameType, NewGame } from '../../../types/game';
 import './CreateGame.css';
-import { useTranslation } from 'react-i18next';
 import { getCards, getCustomCards } from '../../Players/CardPicker/CardConfigs';
 
 const gameNameConfig: Config = {
@@ -39,7 +37,6 @@ export const CreateGame = () => {
   const [allowMembersToManageSession, setAllowMembersToManageSession] = useState(false);
   const [customOptions, setCustomOptions] = React.useState(Array(10).fill(''));
   const [error, setError] = React.useState(false);
-  const { t } = useTranslation();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -66,15 +63,13 @@ export const CreateGame = () => {
     if (newGameId) {
       setLoading(false);
     }
-    history.push(`/game/${newGameId}`);
+    history.push(`/apps/voting/game/${newGameId}`);
   };
 
   const handleCustomOptionChange = (index: number, value: string) => {
     const newCustomOptions = [...customOptions];
     newCustomOptions[index] = value;
     setCustomOptions(newCustomOptions);
-
-    // Count the number of custom options that have a value
   };
 
   const emptyGameName = () => {
@@ -96,17 +91,12 @@ export const CreateGame = () => {
     <Grow in={true} timeout={1000}>
       <form onSubmit={handleSubmit}>
         <Card variant='outlined' className='CreateGameCard'>
-          <CardHeader
-            className='CreateGameCardHeader'
-            title={t('HomePage.heroSection.formNewSession.newSessionHeader')}
-            titleTypographyProps={{ variant: 'h4' }}
-          />
           <CardContent className='CreateGameCardContent'>
             <TextField
               className='CreateGameTextField'
               required
               id='filled-required'
-              label={t('HomePage.heroSection.formNewSession.sessionNameLabel')}
+              label={'Session Name'}
               placeholder='Enter a session name'
               value={gameName || ''}
               onClick={() => emptyGameName()}
@@ -117,7 +107,7 @@ export const CreateGame = () => {
               className='CreateGameTextField'
               required
               id='filled-required'
-              label={t('HomePage.heroSection.formNewSession.yourNameLabel')}
+              label={'Your Name'}
               placeholder='Enter your name'
               value={createdBy || ''}
               onClick={() => emptyCreatorName()}

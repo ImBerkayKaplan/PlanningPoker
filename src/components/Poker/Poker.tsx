@@ -22,7 +22,7 @@ export const Poker = () => {
     if(effectCleanup) {
       const currentPlayerId = getCurrentPlayerId(id);
       if (!currentPlayerId) {
-        history.push(`/join/${id}`);
+        history.push(`/apps/voting/join/${id}`);
       }
       
       setCurrentPlayerId(currentPlayerId);
@@ -51,7 +51,7 @@ export const Poker = () => {
         });
         const currentPlayerId = getCurrentPlayerId(id);
         if (!players.find((player) => player.id === currentPlayerId)) {
-          history.push(`/join/${id}`);
+          history.push(`/apps/voting/join/${id}`);
         }
         setPlayers(players);
       }
