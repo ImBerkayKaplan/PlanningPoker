@@ -1,6 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Grow, TextField, Snackbar } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, Grow, TextField, Snackbar, Grid } from '@material-ui/core';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getGame } from '../../../service/games';
 import { addPlayerToGame, isCurrentPlayerInGame } from '../../../service/players';
 import Alert from '@material-ui/lab/Alert';
@@ -8,9 +8,11 @@ import './JoinGame.css';
 
 export const JoinGame = () => {
   const history = useHistory();
-  let { id } = useParams<{ id: string }>();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const joinId = queryParams.get('join');
 
-  const [joinGameId, setJoinGameId] = useState(id);
+  const [joinGameId, setJoinGameId] = useState(joinId || '');
   const [playerName, setPlayerName] = useState('');
   const [gameFound, setIsGameFound] = useState(true);
   const [showNotExistMessage, setShowNotExistMessage] = useState(false);
@@ -18,22 +20,24 @@ export const JoinGame = () => {
 
   useEffect(() => {
     async function fetchData() {
-      if (joinGameId) {
-        if (await getGame(joinGameId)) {
+      if (joinId) {
+        if (await getGame(joinId)) {
           setIsGameFound(true);
-          if (await isCurrentPlayerInGame(joinGameId)) {
-            history.push(`/apps/voting/game/${joinGameId}`);
+          setJoinGameId(joinId);
+          // Don't automatically redirect if player hasn't joined yet
+          if (await isCurrentPlayerInGame(joinId)) {
+            history.push(`/apps/voting/game/${joinId}`);
           }
-        }else {
+        } else {
           setShowNotExistMessage(true);
           setTimeout(() => {
             history.push('/apps/voting');
-          }, 5000)
+          }, 5000);
         }
       }
     }
     fetchData();
-  }, [joinGameId, history]);
+  }, [joinId, history]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();

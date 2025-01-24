@@ -54,7 +54,7 @@ describe('Toolbar component', () => {
     render(<Toolbar />);
     const newSession = screen.getByTestId('toolbar.menu.joinSession');
     userEvent.click(newSession);
-    expect(mockHistoryPush).toBeCalledWith('/join');
+    expect(mockHistoryPush).toBeCalledWith('/apps/voting/join');
   });
   it('should navigate to home page when Title is clicked clicked', () => {
     render(<Toolbar />);

@@ -1,5 +1,5 @@
 import { Divider, Grid, Slide } from '@material-ui/core';
-import { useRouteMatch } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { CreateGame } from '../../components/Poker/CreateGame/CreateGame';
 import { JoinGame } from '../../components/Poker/JoinGame/JoinGame';
 import { RecentGames } from '../../components/Poker/RecentGames/RecentGames';
@@ -7,14 +7,18 @@ import './HomePage.css';
 import { GoogleAd } from '../../components/GoogleAd/GoogleAd';
 
 export const HomePage = () => {
-  const isJoin = useRouteMatch('/apps/voting/join');
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const joinId = queryParams.get('join');
 
   return (
     <>
       <Grid container direction='column' justify='center' alignItems='center'>
         <Grid container item sm={12} lg={11} justify='center' alignItems='center'>
           <Grid item sm={12} lg={6}>
-            <div className='HomePageContainer'>{isJoin ? <JoinGame /> : <CreateGame />}</div>
+            <div className='HomePageContainer'>
+              {joinId ? <JoinGame /> : <CreateGame />}
+            </div>
           </Grid>
         </Grid>
         <GoogleAd />
