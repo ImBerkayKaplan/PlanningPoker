@@ -44,7 +44,18 @@ export const updatePlayerValue = async (gameId: string, playerId: string, value:
 
 export const getPlayerRecentGames = async (): Promise<PlayerGame[]> => {
   let playerGames: PlayerGame[] = getPlayerGamesFromCache();
-  return playerGames;
+  
+  const verifiedGames = [];
+  for (const game of playerGames) {
+    const exists = await getGameFromStore(game.id);
+    if (exists) {
+      verifiedGames.push(game);
+    }
+  }
+  
+  updatePlayerGamesInCache(verifiedGames);
+  
+  return verifiedGames;
 };
 
 export const getCurrentPlayerId = (gameId: string): string | undefined => {
