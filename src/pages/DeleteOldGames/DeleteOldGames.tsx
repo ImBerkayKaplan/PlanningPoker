@@ -1,5 +1,5 @@
 import { Grid } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { deleteOldGames } from '../../service/games';
 
 export const DeleteOldGames = () => {

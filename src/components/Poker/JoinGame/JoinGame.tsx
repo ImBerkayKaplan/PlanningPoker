@@ -1,6 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardHeader, Grow, TextField, Snackbar, Grid } from '@material-ui/core';
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Button, Card, CardActions, CardContent, CardHeader, Grow, TextField, Snackbar } from '@material-ui/core';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { getGame } from '../../../service/games';
 import { addPlayerToGame, isCurrentPlayerInGame } from '../../../service/players';
 import Alert from '@material-ui/lab/Alert';
@@ -8,9 +8,9 @@ import './JoinGame.css';
 
 export const JoinGame = () => {
   const history = useHistory();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const joinId = queryParams.get('join');
+  const params = useParams<{id?: string}>();
+  // Get game ID from URL params instead of query params
+  const joinId = params.id;
 
   const [joinGameId, setJoinGameId] = useState(joinId || '');
   const [playerName, setPlayerName] = useState('');
