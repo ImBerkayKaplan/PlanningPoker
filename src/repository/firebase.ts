@@ -99,7 +99,7 @@ export const removeGameFromStore = async (gameId: string) => {
 };
 
 export const removeOldGameFromStore = async () => {
-  const monthsToDelete = 6;
+  const monthsToDelete = 1;
   const dateObj = new Date();
   const requiredDate = new Date(dateObj.setMonth(dateObj.getMonth() - monthsToDelete));
   const games = await db.collection(gamesCollectionName).where('createdAt', '<', requiredDate).get();

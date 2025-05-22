@@ -44,9 +44,7 @@ export const GameController: React.FC<GameControllerProps> = ({ game, currentPla
   };
 
   const leaveGame = async () => {
-    if (game.id && currentPlayerId) {
-      await removePlayer(game.id, currentPlayerId);
-    }
+    await removePlayer(game.id, currentPlayerId);
     history.push(`/apps/voting`);
   };
 
