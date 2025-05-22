@@ -18,6 +18,7 @@ function App() {
             <Toolbar />
             <Switch>
               <Route path='/apps/voting/game/:id' component={GamePage} />
+              <Route path="/apps/voting/game" component={JoinPage} />
               <Route path='/apps/voting/join/:id' component={JoinPage} />
               <Route path="/apps/voting/join" component={JoinPage} />
               <Route path='/apps/voting/delete-old-games' component={DeleteOldGames} />
