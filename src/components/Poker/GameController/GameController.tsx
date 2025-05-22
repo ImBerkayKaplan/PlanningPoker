@@ -21,6 +21,7 @@ import { finishGame, resetGame, removeGame } from '../../../service/games';
 import { Game, GameType } from '../../../types/game';
 import { isModerator } from '../../../utils/isModerator';
 import { AlertDialog } from '../../../components/AlertDialog/AlertDialog';
+import { removePlayer } from '../../../service/players';
 import './GameController.css';
 
 interface GameControllerProps {
@@ -42,7 +43,10 @@ export const GameController: React.FC<GameControllerProps> = ({ game, currentPla
     setShowCopiedMessage(true);
   };
 
-  const leaveGame = () => {
+  const leaveGame = async () => {
+    if (game.id && currentPlayerId) {
+      await removePlayer(game.id, currentPlayerId);
+    }
     history.push(`/apps/voting`);
   };
 
