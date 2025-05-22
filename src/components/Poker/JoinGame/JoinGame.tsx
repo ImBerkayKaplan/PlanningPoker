@@ -13,7 +13,6 @@ export const JoinGame = () => {
   // Get game ID from URL params or query params
   const queryParams = new URLSearchParams(location.search);
   const joinId = params.id || queryParams.get('join') || '';
-  console.log('Join ID:', joinId);
 
   const [joinGameId, setJoinGameId] = useState(joinId || '');
   const [playerName, setPlayerName] = useState('');
@@ -29,7 +28,7 @@ export const JoinGame = () => {
           setJoinGameId(joinId);
           // Don't automatically redirect if player hasn't joined yet
           if (await isCurrentPlayerInGame(joinId)) {
-            history.push(`/apps/voting/game/${joinId}`);
+            history.push(`/apps/voting/${joinId}`);
           }
         } else {
           setShowNotExistMessage(true);

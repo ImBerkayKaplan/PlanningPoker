@@ -14,6 +14,7 @@ interface GameAreaProps {
 export const GameArea: React.FC<GameAreaProps> = ({ game, players, currentPlayerId }) => {
   return (
     <>
+      <div className='issueSupportNote'><b>Please create an issue on this project's <a href="https://github.com/ImBerkayKaplan/PlanningPoker/issues">GitHub Page</a> if you spot a bug and include as much information as possible, such as screenshots.</b></div>
       <div className='ContentArea'>
         <Players game={game} players={players} currentPlayerId={currentPlayerId} />
         <GameController game={game} currentPlayerId={currentPlayerId} />
